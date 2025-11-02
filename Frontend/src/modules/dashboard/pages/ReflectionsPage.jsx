@@ -81,32 +81,36 @@ export const ReflectionsPage = () => {
   }
 
   return (
-    <div className="p-8">
-      <div className="max-w-6xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-indigo-50/30 to-purple-50/30">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12">
         {/* Header */}
-        <div className="mb-8">
-          <div className="flex items-center gap-3 mb-2">
-            <BookOpen className="w-8 h-8 text-indigo-600" />
-            <h1 className="text-3xl font-bold text-gray-900">My Reflections</h1>
+        <div className="mb-8 sm:mb-12">
+          <div className="flex items-center gap-3 mb-3">
+            <div className="p-2 bg-indigo-100 rounded-xl">
+              <BookOpen className="w-6 h-6 sm:w-8 sm:h-8 text-indigo-600" />
+            </div>
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900">My Reflections</h1>
           </div>
-          <p className="text-gray-600">
-            Review your past reflections and track your journey
+          <p className="text-sm sm:text-base text-gray-600">
+            Review your past reflections and track your personal growth journey
           </p>
         </div>
 
         {/* Reflections Grid */}
         {reflections.length === 0 ? (
-          <div className="bg-white rounded-xl shadow-sm p-12 border border-gray-200 text-center">
-            <BookOpen className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">
-              No reflections yet
+          <div className="bg-white rounded-2xl shadow-lg p-8 sm:p-12 lg:p-16 border border-gray-100 text-center">
+            <div className="inline-flex p-4 bg-indigo-50 rounded-full mb-4">
+              <BookOpen className="w-12 h-12 sm:w-16 sm:h-16 text-indigo-300" />
+            </div>
+            <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3">
+              No Reflections Yet
             </h3>
-            <p className="text-gray-600">
-              Start your journey by completing your first daily reflection
+            <p className="text-sm sm:text-base text-gray-600 max-w-md mx-auto">
+              Start your journey of self-discovery by completing your first daily reflection
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {reflections.map((reflection) => (
               <ReflectionCard
                 key={reflection.id}
@@ -130,47 +134,90 @@ export const ReflectionsPage = () => {
         size="xl"
       >
         {selectedReflection && (
-          <div className="space-y-6">
+          <div className="space-y-6 sm:space-y-8">
             {/* Reflection Details */}
-            <div className="bg-gray-50 rounded-lg p-6 space-y-4">
-              <div>
-                <h4 className="font-semibold text-gray-900 mb-2">How was your day?</h4>
-                <p className="text-gray-700">{selectedReflection.daySummary}</p>
+            <div className="bg-gradient-to-br from-gray-50 to-indigo-50/30 rounded-2xl p-6 sm:p-8 space-y-6 border border-gray-100">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 bg-indigo-100 rounded-lg">
+                  <BookOpen className="w-5 h-5 text-indigo-600" />
+                </div>
+                <h3 className="text-lg font-bold text-gray-900">Your Reflection</h3>
               </div>
-              <div>
-                <h4 className="font-semibold text-gray-900 mb-2">Social Media Usage</h4>
-                <p className="text-gray-700">{selectedReflection.socialMediaTime}</p>
-              </div>
-              <div>
-                <h4 className="font-semibold text-gray-900 mb-2">Truthfulness & Kindness</h4>
-                <p className="text-gray-700">{selectedReflection.truthfulnessKindness}</p>
-              </div>
-              <div>
-                <h4 className="font-semibold text-gray-900 mb-2">Conscious Actions</h4>
-                <p className="text-gray-700">{selectedReflection.consciousActions}</p>
-              </div>
-              <div>
-                <h4 className="font-semibold text-gray-900 mb-2">Overthinking/Stress</h4>
-                <p className="text-gray-700">{selectedReflection.overthinkingStress}</p>
-              </div>
-              <div>
-                <h4 className="font-semibold text-gray-900 mb-2">Gratitude Expression</h4>
-                <p className="text-gray-700">{selectedReflection.gratitudeExpression}</p>
-              </div>
-              <div>
-                <h4 className="font-semibold text-gray-900 mb-2">Proud Moment</h4>
-                <p className="text-gray-700">{selectedReflection.proudMoment}</p>
+              
+              <div className="space-y-5">
+                <div className="bg-white rounded-xl p-4 sm:p-5 shadow-sm">
+                  <h4 className="font-semibold text-gray-900 mb-2 text-sm flex items-center gap-2">
+                    <span className="w-6 h-6 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600 text-xs">1</span>
+                    How was your day?
+                  </h4>
+                  <p className="text-gray-700 leading-relaxed text-sm sm:text-base">{selectedReflection.daySummary}</p>
+                </div>
+                
+                <div className="bg-white rounded-xl p-4 sm:p-5 shadow-sm">
+                  <h4 className="font-semibold text-gray-900 mb-2 text-sm flex items-center gap-2">
+                    <span className="w-6 h-6 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 text-xs">2</span>
+                    Social Media Usage
+                  </h4>
+                  <p className="text-gray-700 leading-relaxed text-sm sm:text-base">{selectedReflection.socialMediaTime}</p>
+                </div>
+                
+                <div className="bg-white rounded-xl p-4 sm:p-5 shadow-sm">
+                  <h4 className="font-semibold text-gray-900 mb-2 text-sm flex items-center gap-2">
+                    <span className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 text-xs">3</span>
+                    Truthfulness & Kindness
+                  </h4>
+                  <p className="text-gray-700 leading-relaxed text-sm sm:text-base">{selectedReflection.truthfulnessKindness}</p>
+                </div>
+                
+                <div className="bg-white rounded-xl p-4 sm:p-5 shadow-sm">
+                  <h4 className="font-semibold text-gray-900 mb-2 text-sm flex items-center gap-2">
+                    <span className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center text-green-600 text-xs">4</span>
+                    Conscious Actions
+                  </h4>
+                  <p className="text-gray-700 leading-relaxed text-sm sm:text-base">{selectedReflection.consciousActions}</p>
+                </div>
+                
+                <div className="bg-white rounded-xl p-4 sm:p-5 shadow-sm">
+                  <h4 className="font-semibold text-gray-900 mb-2 text-sm flex items-center gap-2">
+                    <span className="w-6 h-6 bg-yellow-100 rounded-full flex items-center justify-center text-yellow-600 text-xs">5</span>
+                    Overthinking/Stress
+                  </h4>
+                  <p className="text-gray-700 leading-relaxed text-sm sm:text-base">{selectedReflection.overthinkingStress}</p>
+                </div>
+                
+                <div className="bg-white rounded-xl p-4 sm:p-5 shadow-sm">
+                  <h4 className="font-semibold text-gray-900 mb-2 text-sm flex items-center gap-2">
+                    <span className="w-6 h-6 bg-pink-100 rounded-full flex items-center justify-center text-pink-600 text-xs">6</span>
+                    Gratitude Expression
+                  </h4>
+                  <p className="text-gray-700 leading-relaxed text-sm sm:text-base">{selectedReflection.gratitudeExpression}</p>
+                </div>
+                
+                <div className="bg-white rounded-xl p-4 sm:p-5 shadow-sm">
+                  <h4 className="font-semibold text-gray-900 mb-2 text-sm flex items-center gap-2">
+                    <span className="w-6 h-6 bg-teal-100 rounded-full flex items-center justify-center text-teal-600 text-xs">7</span>
+                    Proud Moment
+                  </h4>
+                  <p className="text-gray-700 leading-relaxed text-sm sm:text-base">{selectedReflection.proudMoment}</p>
+                </div>
               </div>
             </div>
 
             {/* AI Analysis */}
             <div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">AI Insights</h3>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 bg-purple-100 rounded-lg">
+                  <X className="w-5 h-5 text-purple-600" />
+                </div>
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900">Personal Insights</h3>
+              </div>
               {analysisLoading ? (
-                <div className="bg-white rounded-xl shadow-sm p-12 border border-gray-200">
+                <div className="bg-white rounded-2xl shadow-lg p-8 sm:p-12 border border-gray-100">
                   <div className="text-center">
-                    <Loader size="lg" />
-                    <p className="text-gray-600 mt-4">Loading insights...</p>
+                    <div className="inline-flex p-4 bg-indigo-50 rounded-full mb-4">
+                      <Loader size="lg" />
+                    </div>
+                    <p className="text-gray-600 font-medium">Loading insights...</p>
                   </div>
                 </div>
               ) : (

@@ -76,43 +76,77 @@ export const DailyReflectionForm = ({ onSuccess, onCancel }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
       {error && (
-        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg flex items-center gap-2">
-          <AlertCircle className="w-5 h-5" />
-          <span>{error}</span>
+        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl flex items-start gap-3 animate-shake">
+          <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
+          <span className="text-sm">{error}</span>
         </div>
       )}
 
-      <div className="bg-indigo-50 border border-indigo-200 text-indigo-800 px-4 py-3 rounded-lg">
-        <p className="text-sm">
-          Take a moment to reflect on your day. Be honest with yourself - this is your personal space for growth.
-        </p>
+      <div className="bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-200 text-indigo-900 px-4 sm:px-5 py-4 rounded-xl">
+        <div className="flex items-start gap-3">
+          <CheckCircle className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-0.5" />
+          <p className="text-sm leading-relaxed">
+            Take a mindful moment to reflect on your day. Be honest with yourself - this is your personal space for growth and self-discovery.
+          </p>
+        </div>
       </div>
 
-      {questions.map((question, index) => (
-        <div key={question.key}>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            {index + 1}. {question.label}
-            <span className="text-red-500 ml-1">*</span>
-          </label>
-          <textarea
-            required
-            value={formData[question.key]}
-            onChange={(e) => setFormData({ ...formData, [question.key]: e.target.value })}
-            rows={question.rows}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent resize-none"
-            placeholder={question.placeholder}
-          />
-        </div>
-      ))}
+      <div className="space-y-5">
+        {questions.map((question, index) => (
+          <div key={question.key} className="bg-gray-50 rounded-xl p-4 sm:p-5 border border-gray-200">
+            <label className="block text-sm font-semibold text-gray-900 mb-3">
+              <span className="inline-flex items-center gap-2">
+                <span className="flex items-center justify-center w-6 h-6 bg-indigo-600 text-white rounded-full text-xs font-bold">
+                  {index + 1}
+                </span>
+                <span>{question.label}</span>
+                <span className="text-red-500">*</span>
+              </span>
+            </label>
+            <textarea
+              required
+              value={formData[question.key]}
+              onChange={(e) => setFormData({ ...formData, [question.key]: e.target.value })}
+              rows={question.rows}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 resize-none bg-white text-sm sm:text-base transition-all duration-200"
+              placeholder={question.placeholder}
+            />
+          </div>
+        ))}
+      </div>
 
-      <div className="flex gap-4 pt-4">
-        <Button type="button" variant="secondary" onClick={onCancel} fullWidth>
+      <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4 sticky bottom-0 bg-white pb-2 -mb-2">
+        <Button 
+          type="button" 
+          variant="secondary" 
+          onClick={onCancel} 
+          fullWidth
+          className="order-2 sm:order-1"
+        >
           Cancel
         </Button>
-        <Button type="submit" fullWidth disabled={submitting}>
-          {submitting ? 'Submitting...' : 'Submit Reflection'}
+        <Button 
+          type="submit" 
+          fullWidth 
+          disabled={submitting}
+          className="order-1 sm:order-2 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700"
+        >
+          {submitting ? (
+            <span className="flex items-center justify-center gap-2">
+              <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              Submitting...
+            </span>
+          ) : (
+            <span className="flex items-center justify-center gap-2">
+              <CheckCircle className="w-4 h-4" />
+              Submit Reflection
+            </span>
+          )}
         </Button>
       </div>
     </form>
