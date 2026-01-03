@@ -12,7 +12,8 @@ class AnalysisService {
 
     const analysis = await analysisRepository.findByReflectionId(reflectionId, userId);
     if (!analysis) {
-      throw new NotFoundError('Analysis not found for this reflection');
+      // Return null if analysis doesn't exist yet (may still be generating)
+      return null;
     }
 
     return this.formatAnalysis(analysis);
